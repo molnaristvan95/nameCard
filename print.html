@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="description" content="">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Molnár István || Мельник Степан">
+  <meta name="keywords" content="">
+  <meta name="theme-color" content="#050">
+  <title>Hervis _ NameCard</title>
+  <style rel="stylesheet" type="text/css">
+    *:root {
+      font-size: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body#main {
+      margin: 0;
+      displa: flex;
+      align-items: center;
+      justify-content: center;
+      background: #000;
+    }
+
+    body>*:not(script) {
+      display: block;
+      margin: 0 auto;
+    }
+
+    h2 {
+      color: #0f0;
+    }
+
+    #container {
+      border: 1px solid blue;
+      width: 210mm;
+      height: 297mm;
+      background: white !important;
+    }
+
+    section.container::after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+
+    #container>* {
+      float: left;
+      margin: 1px;
+    }
+
+    .card {
+      width: 64mm;
+      height: 30mm;
+      background: #000;
+    }
+
+    .left {
+      width: 30mm;
+      margin-left: 3mm;
+      float: left;
+    }
+
+    .name {
+      margin-top: 6mm;
+      border-top-right-radius: 4px;
+      border-top-left-radius: 4px;
+    }
+
+    .employee {
+      border-bottom-right-radius: 4px;
+      border-bottom-left-radius: 4px;
+    }
+
+    .name,
+    .employee {
+      width: 30mm;
+      background: white;
+      color: #000;
+      height: 9mm;
+      font-size: 6mm;
+      white-space: nowrap;
+    }
+
+    .right {
+      float: right;
+      margin-right: 2mm;
+      margin-top: 5mm;
+    }
+
+    .right>img {
+      width: 25mm;
+      object-fit: contain;
+    }
+
+    .website {
+      color: #fff;
+    }
+
+    .left>*,
+    .right>* {
+      display: block;
+    }
+
+    .name,
+    .employee,
+    .website {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    img,
+    .website {
+      borde: 1px solid white;
+    }
+
+
+
+    @media print {
+      body#main {
+        background: white;
+      }
+
+      h2 {
+        display: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body id="main">
+  <h2 id="data" contenteditable="true" style="display:none;">Viki,Értékesítő,István,Értékesítő,Márkus Máté, Áruházvezető,Tóth Zoltánné,Osztályvezető,Mezei Georgina,Osztályvezető,Viki,Értékesítő,István,Értékesítő,Márkus Máté, Áruházvezető,Tóth Zoltánné,Osztályvezető,Mezei Georgina,Osztályvezető,Feri,Értékesítő,Feri,Értékesítő,Feri,Értékesítő,Feri,Értékesítő,Gergő,Értékesítő,Gergő,Értékesítő,Enikő,Értékesítő,Enikő,Értékesítő,Enikő,Értékesítő,Enikő,Értékesítő,Enikő,Értékesítő</h2>
+  <section id="container">
+
+  </section>
+  <script type="text/javascript">
+    const gen = (e) => {
+        return document.createElement(e);
+      },
+      image = '/HervisLogo_HQ_NO_BG.png',
+      home = 'www.hervis.hu',
+      insert = (arr) => {
+        let cont = document.getElementById('container');
+        for (let a = 0; a < arr.length; a += 2) {
+          if (arr[a].length > 9) {
+            cont.innerHTML += '<section class="card"><div class="left"><span class="name" contenteditable="true" style="font-size:4.5mm;">' + arr[a] + '</span><span class="employee" contenteditable="true">' + arr[a + 1] + '</span></div>  <div class="right"><img src="' + image + '"><span class="website">' + home + '</span></div></section>';
+            if (arr[a + 1].length > 9) {
+              cont.innerHTML += '<section class="card"><div class="left"><span class="name" contenteditable="true" style="font-size:4.5mm;">' + arr[a] + '</span><span class="employee" contenteditable="true" style="font-size:4.5mm;">' + arr[a + 1] + '</span></div>  <div class="right"><img src="' + image + '"><span class="website">' + home + '</span></div></section>';
+            }
+          } else {
+            cont.innerHTML += '<section class="card"><div class="left"><span class="name" contenteditable="true">' + arr[a] + '</span><span class="employee" contenteditable="true">' + arr[a + 1] + '</span></div>  <div class="right"><img src="' + image + '"><span class="website">' + home + '</span></div></section>';
+            if (arr[a + 1].length > 11) {
+              cont.innerHTML += '<section class="card"><div class="left"><span class="name" contenteditable="true">' + arr[a] + '</span><span class="employee" contenteditable="true" style="font-size:4.5mm;">' + arr[a + 1] + '</span></div>  <div class="right"><img src="' + image + '"><span class="website">' + home + '</span></div></section>';
+            }
+          }
+
+        }
+      };
+    let array = () => {
+      let str = document.getElementById('data'),
+        obj = str.innerText.split(',');
+      return obj;
+    }
+    insert(array());
+
+    window.addEventListener('keydown', () => {
+      let k = event.key;
+      if (k === '*') {
+        document.getElementById('container').innerHTML = '';
+        insert(array());
+      } else {
+        console.log(k);
+      }
+    });
+  </script>
+</body>
+
+</html>
