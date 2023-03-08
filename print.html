@@ -142,7 +142,7 @@
     const gen = (e) => {
         return document.createElement(e);
       },
-      image = '/HervisLogo_HQ_NO_BG.png',
+      image = 'https://molnaristvan95.github.io/nameCard/HervisLogo_HQ_NO_BG.png',
       home = 'www.hervis.hu',
       insert = (arr) => {
         let cont = document.getElementById('container');
@@ -173,6 +173,8 @@
       if (k === '*') {
         document.getElementById('container').innerHTML = '';
         insert(array());
+      } else if (k === 'p') {
+        window.print();
       } else {
         console.log(k);
       }
