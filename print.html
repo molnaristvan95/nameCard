@@ -2,11 +2,11 @@
 <html lang="en">
 
 <head>
-  <meta name="description" content="">
+  <meta name="description" content="Name card printing program by js">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Molnár István || Мельник Степан">
-  <meta name="keywords" content="">
+  <meta name="keywords" content="print">
   <meta name="theme-color" content="#050">
   <title>Hervis _ NameCard</title>
   <style rel="stylesheet" type="text/css">
@@ -134,7 +134,7 @@
 </head>
 
 <body id="main">
-  <h2 id="data" contenteditable="true" style="display:none;">Viki,Értékesítő,István,Értékesítő,Márkus Máté, Áruházvezető,Tóth Zoltánné,Osztályvezető,Mezei Georgina,Osztályvezető,Viki,Értékesítő,István,Értékesítő,Márkus Máté, Áruházvezető,Tóth Zoltánné,Osztályvezető,Mezei Georgina,Osztályvezető,Feri,Értékesítő,Feri,Értékesítő,Feri,Értékesítő,Feri,Értékesítő,Gergő,Értékesítő,Gergő,Értékesítő,Enikő,Értékesítő,Enikő,Értékesítő,Enikő,Értékesítő,Enikő,Értékesítő,Enikő,Értékesítő</h2>
+  <h2 id="data" contenteditable="true" style="displa:none;">Viki,Értékesítő,István,Értékesítő,Márkus Máté, Áruházvezető,Tóth Zoltánné,Osztályvezető,Mezei Georgina,Osztályvezető,Feri,Értékesítő,Feri,Értékesítő,Gergő,Értékesítő,Enikő,Értékesítő,Viki,Értékesítő,István,Értékesítő,Márkus Máté, Áruházvezető,Tóth Zoltánné,Osztályvezető,Mezei Georgina,Osztályvezető,Feri,Értékesítő,Feri,Értékesítő,Gergő,Értékesítő,Enikő,Értékesítő,Viki,Értékesítő,István,Értékesítő,Márkus Máté, Áruházvezető,Tóth Zoltánné,Osztályvezető,Mezei Georgina,Osztályvezető,Feri,Értékesítő,Feri,Értékesítő,Gergő,Értékesítő,Enikő,Értékesítő</h2>
   <section id="container">
 
   </section>
@@ -147,18 +147,7 @@
       insert = (arr) => {
         let cont = document.getElementById('container');
         for (let a = 0; a < arr.length; a += 2) {
-          if (arr[a].length > 9) {
-            cont.innerHTML += '<section class="card"><div class="left"><span class="name" contenteditable="true" style="font-size:4.5mm;">' + arr[a] + '</span><span class="employee" contenteditable="true">' + arr[a + 1] + '</span></div>  <div class="right"><img src="' + image + '"><span class="website">' + home + '</span></div></section>';
-            if (arr[a + 1].length > 9) {
-              cont.innerHTML += '<section class="card"><div class="left"><span class="name" contenteditable="true" style="font-size:4.5mm;">' + arr[a] + '</span><span class="employee" contenteditable="true" style="font-size:4.5mm;">' + arr[a + 1] + '</span></div>  <div class="right"><img src="' + image + '"><span class="website">' + home + '</span></div></section>';
-            }
-          } else {
-            cont.innerHTML += '<section class="card"><div class="left"><span class="name" contenteditable="true">' + arr[a] + '</span><span class="employee" contenteditable="true">' + arr[a + 1] + '</span></div>  <div class="right"><img src="' + image + '"><span class="website">' + home + '</span></div></section>';
-            if (arr[a + 1].length > 11) {
-              cont.innerHTML += '<section class="card"><div class="left"><span class="name" contenteditable="true">' + arr[a] + '</span><span class="employee" contenteditable="true" style="font-size:4.5mm;">' + arr[a + 1] + '</span></div>  <div class="right"><img src="' + image + '"><span class="website">' + home + '</span></div></section>';
-            }
-          }
-
+          cont.innerHTML += '<section class="card"><div class="left"><span class="name" contenteditable="true">' + arr[a] + '</span><span class="employee" contenteditable="true">' + arr[a + 1] + '</span></div>  <div class="right"><img src="' + image + '"><span class="website">' + home + '</span></div></section>';
         }
       };
     let array = () => {
@@ -173,12 +162,33 @@
       if (k === '*') {
         document.getElementById('container').innerHTML = '';
         insert(array());
+        patchFontSize(document.getElementsByClassName('name'));
+        patchFontSize(document.getElementsByClassName('employee'));
       } else if (k === 'p') {
         window.print();
       } else {
         console.log(k);
       }
     });
+
+    const patchFontSize = (clas) => {
+      let len = clas.length;
+      for (let d = 0; d < len; d++) {
+        if (clas[d].innerText.length > 13) {
+          //clas[d].style.background = 'green';
+          clas[d].style.fontSize = '4.35mm';
+        } else if (clas[d].innerText.length > 10) {
+          //clas[d].style.background = 'pink';
+          clas[d].style.fontSize = '5mm';
+        }
+      }
+    }
+    patchFontSize(document.getElementsByClassName('name'));
+    patchFontSize(document.getElementsByClassName('employee'));
+    
+    window.setTimeout(() => {
+      window.print();
+    }, 1024);
   </script>
 </body>
 
