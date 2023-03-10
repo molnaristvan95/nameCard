@@ -26,6 +26,11 @@
       background: #000;
     }
 
+    *::before,
+    *::after {
+      color: #000;
+    }
+
     body>*:not(script) {
       display: block;
       margin: 0 auto;
@@ -35,11 +40,25 @@
       color: #0f0;
     }
 
+    h2::after {
+      content: 'Print = P, Generate = *';
+    }
+
+    h2::after {
+      display: block;
+      color: #0ff;
+      font-size: 32px;
+      font-family: courier;
+      font-weight: 100;
+    }
+
     #container {
       border: 1px solid blue;
       width: 210mm;
       height: 297mm;
       background: white !important;
+      padding-left: 2mm;
+      padding-top: 2mm;
     }
 
     section.container::after {
@@ -88,7 +107,7 @@
 
     .right {
       float: right;
-      margin-right: 2mm;
+      margin-right: 3mm;
       margin-top: 5mm;
     }
 
@@ -128,6 +147,11 @@
 
       h2 {
         display: none !important;
+      }
+
+      h2::after {
+        display: none !important;
+        font-size: 0 !important;
       }
     }
   </style>
@@ -185,10 +209,10 @@
     }
     patchFontSize(document.getElementsByClassName('name'));
     patchFontSize(document.getElementsByClassName('employee'));
-    
+
     window.setTimeout(() => {
       window.print();
-    }, 1024);
+    }, 1536);
   </script>
 </body>
 
